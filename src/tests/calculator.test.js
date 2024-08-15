@@ -1,3 +1,5 @@
+const calculate = require("../calculator.js")
+
 describe('Calculator', () => {
   test('обработка сложения', () => {
     expect(calculate('2+3')).toBe(5);
@@ -24,6 +26,6 @@ describe('Calculator', () => {
   });
 
   test('обработка сложного приложения', () => {
-    expect(calculate('3+4*2/(4-1)')).toBe(5.6666666666);
+    expect(calculate('3+4*2/(4-1)')).toBe(5.666666666666666);
   });
 });

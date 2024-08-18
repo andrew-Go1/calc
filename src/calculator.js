@@ -7,13 +7,16 @@ module.exports = function calculate(expression) {
 }
 
 function tokenize(expression) {
-  return expression.match(/(\d+\.?\d*|\+|\-|\*|\/|\^|\(|\))/g) || [];
+  const tokenSymbols = operations.map(op => `\|\\${op.symbol}`);
+  const rex = new RegExp(String.raw`(\d+\.?\d*${tokenSymbols.join('')})`, "g");
+  return expression.match(rex) || [];
 }
 
 function infixToPostfix(tokens) {
   const output = [];
   const operators = [];
-  const precedence = { '+': 1, '-': 1, '*': 2, '/': 2};
+  const precedence = {};
+  operations.forEach(op => { precedence[op.symbol] = op.weight});
 
   for (const token of tokens) {
     if (!isNaN(parseFloat(token))) {

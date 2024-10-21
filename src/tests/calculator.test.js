@@ -1,4 +1,4 @@
-const calculate = require("../calculator.js")
+const calculate = require("../calculator.js");
 
 describe('Calculator', () => {
   test('обработка сложения', () => {
@@ -27,5 +27,25 @@ describe('Calculator', () => {
 
   test('обработка сложного приложения', () => {
     expect(calculate('3+4*2/(4-1)')).toBe(5.666666666666666);
+  });
+
+  test('обработка деления на ноль', () => {
+    expect(() => calculate('10/0')).toThrow('Деление на ноль');
+  });
+
+  test('обработка унарного минуса', () => {
+    expect(calculate('-3+2')).toBe(-1);
+  });
+
+  test('обработка унарного минуса в скобках', () => {
+    expect(calculate('(-3+2)*4')).toBe(-4);
+  });
+
+  test('обработка унарного плюса', () => {
+    expect(calculate('+3+2')).toBe(5);
+  });
+
+  test('обработка унарного плюса в скобках', () => {
+    expect(calculate('(+3+2)*4')).toBe(20);
   });
 });

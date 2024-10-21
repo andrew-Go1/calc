@@ -1,4 +1,4 @@
-const calculator = require('./src/calculator');
+const calculator = require('./calculator');
 const readline = require("readline");
 
 const rl = readline.createInterface({

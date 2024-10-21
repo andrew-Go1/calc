@@ -20,6 +20,10 @@ function tokenize(expression) {
     }
   });
 
+  if (isNaN(tokens[tokens.length - 1]) && tokens[tokens.length - 1] !== ')') {
+    throw new Error('Некорректное выражение');
+  }
+
   return tokens;
 }
 
@@ -31,16 +35,23 @@ function infixToPostfix(tokens) {
   precedence['~'] = 90; //   Приоритет для унарных операций должен быть
   precedence['+~'] = 90; //  выше всех других преобразований
 
+  let bracketCount = 0;
+
   for (const token of tokens) {
     if (!isNaN(parseFloat(token))) {
       output.push(token);
     } else if (token === '(') {
       operators.push(token);
+      bracketCount++;
     } else if (token === ')') {
+      if (bracketCount === 0) {
+        throw new Error('Несоответствие скобок');
+      }
       while (operators.length && operators[operators.length - 1] !== '(') {
         output.push(operators.pop());
       }
       operators.pop();
+      bracketCount--;
     } else {
       while (
         operators.length &&
@@ -55,6 +66,10 @@ function infixToPostfix(tokens) {
 
   while (operators.length) {
     output.push(operators.pop());
+  }
+
+  if (bracketCount !== 0) {
+    throw new Error('Несоответствие скобок');
   }
 
   return output;
@@ -95,5 +110,6 @@ function evaluatePostfix(tokens) {
     }
   }
 
+  if (isNaN(stack[0])) { throw new Error("Некорректное выражение") }
   return stack[0];
 }

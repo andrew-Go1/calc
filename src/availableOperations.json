@@ -1,0 +1,6 @@
+[
+  {"symbol": "+", "jsOperator": "+", "weight": 1},
+  {"symbol": "-", "jsOperator": "-", "weight": 1},
+  {"symbol": "*", "jsOperator": "*", "weight": 2},
+  {"symbol": "/", "jsOperator": "/", "weight": 2}
+]

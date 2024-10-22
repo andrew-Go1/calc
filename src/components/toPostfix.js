@@ -1,4 +1,4 @@
-const operations = require('./availableOperations');
+const operations = require('../availableOperations.json');
 
 function infixToPostfix(tokens) {
   const output = [];

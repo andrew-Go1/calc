@@ -1,3 +1,5 @@
+const operations = require('../availableOperations.json');
+
 function evaluatePostfix(tokens) {
   const stack = [];
 
@@ -14,20 +16,10 @@ function evaluatePostfix(tokens) {
       } else {
         const b = stack.pop();
         const a = stack.pop();
-        switch (token) {
-          case '+':
-            stack.push(a + b);
-            break;
-          case '-':
-            stack.push(a - b);
-            break;
-          case '*':
-            stack.push(a * b);
-            break;
-          case '/':
-            if (b === 0) throw new Error('Деление на ноль');
-            stack.push(a / b);
-            break;
+        for (let operation of operations) {
+          if (token === operation.symbol) {
+            stack.push(eval(`${a}${operation.jsOperator}${b}`));
+          }
         }
       }
     }

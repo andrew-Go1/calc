@@ -1,7 +1,8 @@
-const operations = require('./availableOperations');
+const operations = require('../availableOperations.json');
 
 function tokenize(expression) {
-  const tokenSymbols = operations.map(op => `\\${op.symbol}`).join('|');
+  const tokenOperators = operations.map(op => `\\${op.symbol}`).join('|');
+  const tokenSymbols = tokenOperators + `|\\(|\\)`;
   const rex = new RegExp(`(\\d+(\\.\\d+)?|${tokenSymbols})`, "g");
   const tokens = expression.match(rex) || [];
 

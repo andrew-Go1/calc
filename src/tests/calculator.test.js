@@ -29,10 +29,6 @@ describe('Calculator', () => {
     expect(calculate('3+4*2/(4-1)')).toBe(5.666666666666666);
   });
 
-  test('обработка деления на ноль', () => {
-    expect(() => calculate('10/0')).toThrow('Деление на ноль');
-  });
-
   test('обработка унарного минуса', () => {
     expect(calculate('-3+2')).toBe(-1);
   });

@@ -54,4 +54,8 @@ describe('Calculator', () => {
     expect(() => calculate('(2+3)*4)')).toThrow('Несоответствие скобок');
     expect(() => calculate('((2+3)*4')).toThrow('Несоответствие скобок');
   });
+
+  test('обработка унарного минуса в скобках', () => {
+    expect(calculate('2^(1+2)')).toBe(8);
+  });
 });
